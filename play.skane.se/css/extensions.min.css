@@ -1,0 +1,1 @@
+div.post div.info-box,a.relatedLink div.info-box{position:absolute;left:-7rem}div.post,a.relatedLink{position:relative}div.info-box{z-index:999999;width:400px;padding:10px;border:1px solid gray;background-color:#555;color:#fff;border-radius:5px;box-shadow:0 0 14px rgba(0,0,0,.3)}div.info-box img{width:100%;height:auto}div.info-box h2{color:#fff}div.info-box p{margin-top:10px}

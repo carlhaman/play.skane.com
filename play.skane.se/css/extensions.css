@@ -1,0 +1,45 @@
+﻿div.post div.info-box, a.relatedLink div.info-box
+{
+    /* display: none; 
+        top: -20.5rem;
+        */
+    position: absolute;
+    
+    left: -7rem;    
+}
+
+/*
+div.post:hover div.info-box, a.relatedLink:hover div.info-box
+{
+    display: block;
+}
+    */
+
+div.post, a.relatedLink
+{
+    position: relative;
+}
+
+
+div.info-box
+{
+    z-index: 999999;
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #808080;
+    background-color: #555;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.3);
+}
+
+div.info-box img
+{
+    width: 100%;
+    height: auto;
+}
+div.info-box h2
+{
+    color:#ffffff;
+}
+div.info-box p {margin-top:10px;}

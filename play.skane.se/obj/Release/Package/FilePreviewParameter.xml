@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="brsstage" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Secure\\projekt\\play\.skane\.se\\play\.skane\.se\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Secure\\projekt\\play\.skane\.se\\play\.skane\.se\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

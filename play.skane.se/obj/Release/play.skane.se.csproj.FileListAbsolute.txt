@@ -1,0 +1,14 @@
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\bin\play.skane.se.dll
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\bin\play.skane.se.pdb
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\bin\Newtonsoft.Json.dll
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\bin\Newtonsoft.Json.xml
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\obj\Release\play.skane.se.dll
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\obj\Release\play.skane.se.pdb
+c:\Users\carlh_000\Documents\Visual Studio 2012\Projects\play.skane.se\play.skane.se\obj\Release\play.skane.se.csprojResolveAssemblyReference.cache
+C:\Secure\projekt\play.skane.se\play.skane.se\bin\play.skane.se.dll
+C:\Secure\projekt\play.skane.se\play.skane.se\bin\play.skane.se.pdb
+C:\Secure\projekt\play.skane.se\play.skane.se\bin\Newtonsoft.Json.dll
+C:\Secure\projekt\play.skane.se\play.skane.se\bin\Newtonsoft.Json.xml
+C:\Secure\projekt\play.skane.se\play.skane.se\obj\Release\play.skane.se.csprojResolveAssemblyReference.cache
+C:\Secure\projekt\play.skane.se\play.skane.se\obj\Release\play.skane.se.dll
+C:\Secure\projekt\play.skane.se\play.skane.se\obj\Release\play.skane.se.pdb
