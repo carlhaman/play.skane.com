@@ -59,8 +59,7 @@
                 <a href="/">
                     <img src="graphics/logo.png" alt="logo" /></a>
             </div>
-
-            <input id="search" type="text" />
+            
         </div>
 
         <div class="line"></div>
