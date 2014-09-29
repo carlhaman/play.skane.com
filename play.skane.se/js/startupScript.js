@@ -45,9 +45,69 @@ function infoBoxShow() {
     $('div.info-box').hide();
    
     infoBoxShow();
-    
+
+
 
 })(jQuery);
 
 
+var videoSearch = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: '../search.aspx?query=%QUERY'
+});
 
+videoSearch.initialize();
+
+$('#remote .typeahead').typeahead(null, {
+    highlight: true,
+    name: 'search-results',
+    displayKey: 'title',
+    source: videoSearch.ttAdapter(),
+    templates: {
+        empty: [
+          '<p class="empty-message">',
+          'No videos match the current query',
+          '</p>'
+        ].join('\n'),
+        suggestion: Handlebars.compile('<a href="default.aspx?bctid={{bcid}}"><p><strong>{{title}}</strong></p></a>')
+    }
+});
+
+$('#search').keypress(function (e) {
+    if (e.which == 13) {//Enter key pressed
+        var query = $('#search').val();
+
+        if (query.length >= 1) {
+            $.ajax({
+                url: "../search.aspx?query=" + query,
+                dataType: "json"
+            }).success(function (data) {
+                $('#searchResults').empty();
+                $('#searchResults').append("<h2>Sökresultat för " + query + "</h2>");
+                $.each(data, function (i, item) {
+                    $('#searchResults').append(
+                        "<div class=\"post\">"
+                        + "<a href=\"?bctid=" + data[i].bcid + " \" class=\"videoBox\">"
+                            + "<div class=\"info-box\" style=\"top: -416px; display: none;\">"
+                                + "<h2>" + data[i].title + "</h2>"
+                               + "<img src=\"" + data[i].imageURL + "\"/><p>" + data[i].shortDescription + "</p>"
+                            + "</div>"
+                            + "<div class=\"item-video\">"
+                               + "<img src=\"" + data[i].imageURL + "\" alt=\"" + data[i].shortDescription + "\"/>"
+                            + "</div>"
+                            + " <h3>" + data[i].title + "</h3>"
+                            + "</a>"
+                         + "</div>"
+                        );
+                })
+            }).complete(function () { infoBoxShow(); });
+
+        }
+        $('html,body').animate({
+            scrollTop: $("#searchResults").offset().top
+        });
+
+        
+    }
+});

@@ -59,8 +59,9 @@
                 <a href="/">
                     <img src="graphics/logo.png" alt="logo" /></a>
             </div>
-
-            <input id="search" type="text" />
+            <div id="remote">
+                <input class="typeahead" id="search" type="text" placeholder="Sök..." />
+            </div>
         </div>
 
         <div class="line"></div>
@@ -68,7 +69,12 @@
         <div class="top-video" id="videoContainer" runat="server"></div>
         <div class="related" id="relatedVideos" runat="server"></div>
 
-
+        <div class="searchWrapper">
+            <div class="search-video-listing">
+                <div id="searchResults"></div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
         <div id="wrapper" runat="server">
 
             <!-- Include listing 
@@ -117,6 +123,8 @@
         </div>
 
     </form>
+    <script src="js/typeahead.bundle.min.js"></script>
+    <script src="js/handlebars.min.js"></script>
     <script src="js/startupScript.js"></script>
 </body>
 </html>

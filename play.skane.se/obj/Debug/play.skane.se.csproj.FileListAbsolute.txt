@@ -12,3 +12,14 @@ C:\Secure\projekt\play.skane.se\play.skane.se\bin\Newtonsoft.Json.xml
 C:\Secure\projekt\play.skane.se\play.skane.se\obj\Debug\play.skane.se.csprojResolveAssemblyReference.cache
 C:\Secure\projekt\play.skane.se\play.skane.se\obj\Debug\play.skane.se.dll
 C:\Secure\projekt\play.skane.se\play.skane.se\obj\Debug\play.skane.se.pdb
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\obj\Debug\play.skane.se.csprojResolveAssemblyReference.cache
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\obj\Debug\play.skane.se.dll
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\obj\Debug\play.skane.se.pdb
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\play.skane.se.dll
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\play.skane.se.pdb
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\ICSharpCode.SharpZipLib.dll
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\Lucene.Net.dll
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\Newtonsoft.Json.dll
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\Lucene.Net.pdb
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\Lucene.Net.xml
+C:\Secure\projekt\Git\play.skane.se\play.skane.se\bin\Newtonsoft.Json.xml
