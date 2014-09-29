@@ -1,3 +1,6 @@
+#Lucene Index folder
+play.skane.se/index/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

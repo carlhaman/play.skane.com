@@ -18,10 +18,11 @@ namespace play.skane.se
 
         }
 
-        public void buildIndex()
+        public indexMessage buildIndex(indexMessage message)
         {
             if (_archive == null) { _archive = getVideoArchive(); }
-            buildIndex(_archive);
+            buildIndex(_archive, message);
+            return message;
         }
         private videoArchive getVideoArchive()
         {
@@ -34,27 +35,44 @@ namespace play.skane.se
             }
             return _archive;
         }
-        private void buildIndex(videoArchive archive)
+        private void buildIndex(videoArchive archive, indexMessage message)
         {
-            foreach (videoCategory cat in archive.categories)
-            {
-                foreach (videoItem video in cat.videos)
-                {
-                    string title = "";
-                    if (!string.IsNullOrEmpty(video.name)) { title = video.name; }
-                    string bcid = "";
-                    if (!string.IsNullOrEmpty(video.id)) { bcid = video.id; }
-                    string shortDescription = "";
-                    if (!string.IsNullOrEmpty(video.shortDescription)) { shortDescription = video.shortDescription; }
-                    string longDescription = "";
-                    if (!string.IsNullOrEmpty(video.longDescription)) { longDescription = video.longDescription; }
-                    string imageURL = "";
-                    if (!string.IsNullOrEmpty(video.thumbnailURL)) { imageURL = video.thumbnailURL; }
+            Lucene.Net.Index.IndexWriter writer;
 
-                    addVideoToIndex(bcid, title, shortDescription, longDescription, imageURL);
+            try
+            {
+                writer = new Lucene.Net.Index.IndexWriter(videoIndex, analyser, Lucene.Net.Index.IndexWriter.MaxFieldLength.UNLIMITED);
+                foreach (videoCategory cat in archive.categories)
+                {
+                    foreach (videoItem video in cat.videos)
+                    {
+                        string title = "";
+                        if (!string.IsNullOrEmpty(video.name)) { title = video.name; }
+                        string bcid = "";
+                        if (!string.IsNullOrEmpty(video.id)) { bcid = video.id; }
+                        string shortDescription = "";
+                        if (!string.IsNullOrEmpty(video.shortDescription)) { shortDescription = video.shortDescription; }
+                        string longDescription = "";
+                        if (!string.IsNullOrEmpty(video.longDescription)) { longDescription = video.longDescription; }
+                        string imageURL = "";
+                        if (!string.IsNullOrEmpty(video.thumbnailURL)) { imageURL = video.videoStillURL; }
+
+                        addVideoToIndex(bcid, title, shortDescription, longDescription, imageURL, writer, message);
+                    }
                 }
+                message.success = true;
+                writer.Optimize();
+                message.message = "Index built and optimized!";
+                writer.Dispose();
             }
-            optimizeIndex();
+
+            catch (Exception ex)
+            {
+                message.success = false;
+                message.message = ex.Message;
+            }
+
+
         }
         private bool videoIndexExists()
         {
@@ -73,9 +91,8 @@ namespace play.skane.se
             if (termResults > 0) { exist = true; }
             return exist;
         }
-        private void addVideoToIndex(string bcid, string title, string shortDescription, string longDescription, string imageURL)
+        private void addVideoToIndex(string bcid, string title, string shortDescription, string longDescription, string imageURL, Lucene.Net.Index.IndexWriter writer, indexMessage message)
         {
-            Lucene.Net.Index.IndexWriter writer = new Lucene.Net.Index.IndexWriter(videoIndex, analyser, Lucene.Net.Index.IndexWriter.MaxFieldLength.UNLIMITED);
             Lucene.Net.Documents.Document video = new Lucene.Net.Documents.Document();
 
             video.Add(new Lucene.Net.Documents.Field("title", title, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED, Lucene.Net.Documents.Field.TermVector.YES));
@@ -84,18 +101,19 @@ namespace play.skane.se
             video.Add(new Lucene.Net.Documents.Field("bcid", bcid, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NOT_ANALYZED));
             video.Add(new Lucene.Net.Documents.Field("imageURL", imageURL, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NOT_ANALYZED));
 
-            if (videoExistsInIndex(bcid)) { writer.UpdateDocument(new Lucene.Net.Index.Term("bcid", video.Get("bcid")), video); }
-            else { writer.AddDocument(video); }
-
-            writer.Dispose();
+            if (videoExistsInIndex(bcid))
+            {
+                writer.UpdateDocument(new Lucene.Net.Index.Term("bcid", video.Get("bcid")), video);
+                message.updatedVideo++;
+            }
+            else
+            {
+                writer.AddDocument(video);
+                message.newVideo++;
+            }
 
         }
-        private void optimizeIndex()
-        {
-            Lucene.Net.Index.IndexWriter writer = new Lucene.Net.Index.IndexWriter(videoIndex, analyser, Lucene.Net.Index.IndexWriter.MaxFieldLength.UNLIMITED);
-            writer.Optimize();
-            writer.Dispose();
-        }
+
 
         public List<indexVideo> searchArticles(string queryString, int numberOfResults)
         {
@@ -141,8 +159,9 @@ namespace play.skane.se
                         }
                     }
                 }
-                catch (Exception e) { 
-                
+                catch (Exception e)
+                {
+
                 }
             }
             return resultsList;
@@ -156,6 +175,20 @@ namespace play.skane.se
         public string longDescription { get; set; }
         public string imageURL { get; set; }
         public float score { get; set; }
+    }
+    public class indexMessage
+    {
+        public indexMessage()
+        {
+            newVideo = 0;
+            updatedVideo = 0;
+            success = false;
+            message = string.Empty;
+        }
+        public int newVideo { get; set; }
+        public int updatedVideo { get; set; }
+        public bool success { get; set; }
+        public string message { get; set; }
     }
 
 }

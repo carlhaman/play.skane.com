@@ -18,13 +18,15 @@ namespace play.skane.se
                 string indexString = HttpUtility.UrlDecode(Request.QueryString.GetValues("index").GetValue(0).ToString());
                 if (indexString == "create")
                 {
-                    searcher.buildIndex();
+                    indexMessage message = new indexMessage();
+                    searcher.buildIndex(message);
+
                     Response.Clear();
                     Response.ClearHeaders();
                     Response.ContentType = "application/json";
                     Response.Charset = "UTF-8";
                     Response.ContentEncoding = System.Text.Encoding.UTF8;
-                    Response.Write("{index: \"created\"}");
+                    Response.Write(JsonConvert.SerializeObject(message));
                     Response.End();
                 }
             }
